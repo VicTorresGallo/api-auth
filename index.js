@@ -39,18 +39,44 @@ var allowCrossTokenHeaders = (req, res, next) => {
     return next();
 };
 // middleware
-var auth = (req, res, next) => { // declaramos la función auth
-    if ( !req.headers.token ) { // si no se envía el token...
-        res.status(401).json({ result: 'NO', msg: "Envía un código válido en la cabecera 'token'"});
-        return;
-    };
-    const queToken = req.headers.token; // recogemos el token de la cabecera llamada “token”
-    if ( queToken === accessToken ) { // si coincide con nuestro password...
-        return next(); // continuamos con la ejecución del código
-    } else { // en caso contrario...
-        res.status(401).json({ result: 'NO', msg: "No autorizado" });
-    };
-};
+
+var auth = (req, res, next) => {
+    // Comprobamos que han enviado el token tipo Bearer en el Header
+    if (!req.headers.authorization) {
+      return res.status(401).send({
+        result: "KO",
+        message:
+          "Cabecera de autenticación tipo Bearer no encontrada [Authorization: Bearer jwtToken]",
+      });
+    }
+    const token = req.headers.authorization.split(" ")[1]; // El formato es: Authorization: "Bearer JWT"
+    // Comprobamos que han enviado el token
+    if (!token) {
+      return res.status(401).send({
+        result: "KO",
+        message:
+          "Token de acceso JWT no encontrado dentro de la cabecera [Authorization: Bearer jwtToken]",
+      });
+    }
+    // Verificamos que el token es correcto
+    tokenHelper.decodificaToken(token)
+      .then((userId) => {
+        req.user = {
+          id: userId,
+          token: token,
+        };
+        return next();
+      })
+      .catch((response) => {
+        res.status(response.status);
+        res.json({
+          result: "KO",
+          message: response.message,
+        });
+      });
+  };
+  
+  
 
 // middlewares
 
@@ -115,14 +141,20 @@ app.get('/api/auth',(req, res) => {
     });
 });
 
-app.get('/api/auth/me', auth,(req, res, next) => {
-    const elementoId = req.params.id;
-    db.user.findOne({ _id: id(elementoId) }, (err, elementoRecuperado) => {
-        if (err) return next(err);
-        res.json(elementoRecuperado);
+app.get('/api/auth/me', auth,(req, res) => {
+
+    db.user.find({ _id: id(req.user.id)}, (err, elementoRecuperado) => {
+        if (err) return res.status(500).json({
+            result: 'KO',
+            mensaje: err.message
+        });
+
+        res.json({
+            result: 'OK',
+            usuario: elementoRecuperado
+        });
     });
 });
-
 
 // Realiza una identificación o login (signIn).
 app.post('/api/auth', (req, res, next) => {
@@ -142,7 +174,7 @@ app.post('/api/auth', (req, res, next) => {
             mensaje: err.message
         });
         if(usuarioExist){
-            passHelper.comparaPassword(password, usuarioExist.password).then(coincide => {
+            PassHelper.comparaPassword(password, usuarioExist.password).then(coincide => {
                 if(coincide){
                     usuarioExist.lastLogin = moment().unix();
                     db.user.update({email: email},
@@ -167,6 +199,18 @@ app.post('/api/auth', (req, res, next) => {
                         mensaje: 'No coincide la contraseña con la del usuario'
                     });
                 }
+            }).catch(error => { //Sin catch no llega la rspuesta porque se queda en el then
+                console.error('Error con las contraseñas', error);
+                return res.status(500).json({
+                    result:'KO',
+                    mensaje: 'Error procesando solicitud'
+                });
+            });
+        }else{
+            //no existe el usuario, por lo q se envia una respuesta
+            return res.status(404).json({
+                result:'KO',
+                MENSAJE:'Usuario no encontrado'
             });
         }
     });
