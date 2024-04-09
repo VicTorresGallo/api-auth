@@ -1,0 +1,315 @@
+{
+	"info": {
+		"_postman_id": "eaf4422b-7244-4830-9fbe-6cba5fdaf389",
+		"name": "Api-auth-SD",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25697523"
+	},
+	"item": [
+		{
+			"name": "Todos los Usu",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:4100/api/user",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Devuelve 1 Usuario (segun id)",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://localhost:4100/api/user/id",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"user",
+						"id"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Registrar Usu",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"nombre\": \"prueba\",\n    \"mail\": \"prueba@pru.eba\",\n    \"pass\": \"1234\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:4100/api/user",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Usu (segun id)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:4100/api/user/{id}?token=1234",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"user",
+						"{id}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Usu (segun id)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:4100/api/user/{id}?token=1234",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"user",
+						"{id}"
+					],
+					"query": [
+						{
+							"key": "token",
+							"value": "1234"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Devuelve todos los Usu del Sistema",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:4100/api/auth",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Devuelve Usu (segun JWT)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:4100/api/auth/me",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"auth",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignIn + JWT valido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"prueba2@dtic.ua.es\",\n    \"password\": \"prueba2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:4100/api/auth",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"auth"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SignUp + Token JWT valido",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "1234",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"name\" : \"prueba3\",\n\"email\": \"prueba3@dtic.ua.es\",\n\"pass\": \"prueba3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:4100/api/auth/reg",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "4100",
+					"path": [
+						"api",
+						"auth",
+						"reg"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

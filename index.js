@@ -91,14 +91,14 @@ app.use(helmet());// activamos helmet
 
 // routes
 
-app.get('/api/user', auth,(req, res, next) => {
+app.get('/api/user',(req, res, next) => {
     db.user.find((err, coleccion) => {
         if (err) return next(err);
             res.json(coleccion);
     });
 });
 
-app.get('/api/user/:id', auth,(req, res, next) => {
+app.get('/api/user/:id',(req, res, next) => {
     const elementoId = req.params.id;
     db.user.findOne({ _id: id(elementoId) }, (err, elementoRecuperado) => {
         if (err) return next(err);
