@@ -143,7 +143,7 @@ app.get('/api/auth',(req, res) => {
 
 app.get('/api/auth/me', auth,(req, res) => {
 
-    db.user.find({ _id: id(req.user.id)}, (err, elementoRecuperado) => {
+    db.user.findOne({ _id: id(req.user.id)}, (err, elementoRecuperado) => {
         if (err) return res.status(500).json({
             result: 'KO',
             mensaje: err.message
@@ -210,7 +210,7 @@ app.post('/api/auth', (req, res, next) => {
             //no existe el usuario, por lo q se envia una respuesta
             return res.status(404).json({
                 result:'KO',
-                MENSAJE:'Usuario no encontrado'
+                mensaje:'Usuario no encontrado'
             });
         }
     });
@@ -219,9 +219,9 @@ app.post('/api/auth', (req, res, next) => {
 
 //Hacemos un SignUP()
 app.post('/api/auth/reg',(req, res) => {
-    const { name, email, pass } = req.body;
+    const { name, email, password } = req.body;
     // Verificar que ha llegado un nombre, email y contraseña
-    if (!name || !email || !pass) {
+    if (!name || !email || !password) {
         return res.status(400).json({
           result: "NO",
           msg: "Faltan datos obligatorios, datos : name, email, password",
@@ -242,7 +242,7 @@ app.post('/api/auth/reg',(req, res) => {
         });
 
         // Encriptación de password
-        PassHelper.encriptaPassword(pass).then (hash => {
+        PassHelper.encriptaPassword(password).then (hash => {
             // Creación del nuevo usuario
             const nuevoUsuario = {
                 displayName: name,
