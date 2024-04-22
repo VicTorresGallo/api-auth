@@ -134,7 +134,7 @@ app.delete('/api/user/:id', auth, (req, res, next) => {
     });
 });
 
-app.get('/api/auth',(req, res) => {
+app.get('/api/auth',auth,(req, res) => {
     db.user.find({},{_id:0,displayName:1,email:1},(err, coleccion) => {
         if (err) console.error("error get", err);
             res.json(coleccion);
@@ -159,7 +159,7 @@ app.get('/api/auth/me', auth,(req, res) => {
 // Realiza una identificación o login (signIn).
 app.post('/api/auth', (req, res, next) => {
     const email = req.body.email;
-    const password = req.body.password;
+    const password = req.body.pass;
 
     if(!email || !password){
         return res.status(400).send( {
