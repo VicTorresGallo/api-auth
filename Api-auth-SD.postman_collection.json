@@ -83,7 +83,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\": \"prueba\",\n    \"mail\": \"prueba@pru.eba\",\n    \"pass\": \"1234\"\n}\n",
+					"raw": "{\n    \"name\": \"prueba2\",\n    \"email\": \"prueba2@pru.eba\",\n    \"password\": \"1234\"\n}\n",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -217,7 +217,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NTg4OWI2YzRlMjBmYjFhMDM5ZjgiLCJpYXQiOjE3MTI2NzU0MjksImV4cCI6MTcxMzM4MTAyOX0.D4TEnMmj6-lwd0kRAexllw_403maT0BHcDRfUMdIUQo",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI2NjA3NWUzNzBmNDZkZjE0NmZhMmFlNTkiLCJpYXQiOjE3MTMxODkxNDgsImV4cCI6MTcxMzg5NDc0OH0.ynn1-ewE_4rjytgywwKd1OShXz6iP_5vCf9_rkX5pnQ",
 							"type": "string"
 						}
 					]
@@ -288,7 +288,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"name\" : \"prueba3\",\n\"email\": \"prueba3@dtic.ua.es\",\n\"pass\": \"prueba3\"\n}",
+					"raw": "{\n\"name\" : \"prueba5\",\n\"email\": \"prueba5@dtic.ua.es\",\n\"password\": \"prueba5\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -310,6 +310,12 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "id"
 		}
 	]
 }
